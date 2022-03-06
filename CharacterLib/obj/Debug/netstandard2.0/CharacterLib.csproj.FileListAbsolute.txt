@@ -1,0 +1,9 @@
+C:\Users\caleb\source\CharacterController\CharacterLib\bin\Debug\netstandard2.0\CharacterLib.deps.json
+C:\Users\caleb\source\CharacterController\CharacterLib\bin\Debug\netstandard2.0\CharacterLib.dll
+C:\Users\caleb\source\CharacterController\CharacterLib\bin\Debug\netstandard2.0\CharacterLib.pdb
+C:\Users\caleb\source\CharacterController\CharacterLib\obj\Debug\netstandard2.0\CharacterLib.csprojAssemblyReference.cache
+C:\Users\caleb\source\CharacterController\CharacterLib\obj\Debug\netstandard2.0\CharacterLib.csproj.CoreCompileInputs.cache
+C:\Users\caleb\source\CharacterController\CharacterLib\obj\Debug\netstandard2.0\CharacterLib.AssemblyInfoInputs.cache
+C:\Users\caleb\source\CharacterController\CharacterLib\obj\Debug\netstandard2.0\CharacterLib.AssemblyInfo.cs
+C:\Users\caleb\source\CharacterController\CharacterLib\obj\Debug\netstandard2.0\CharacterLib.dll
+C:\Users\caleb\source\CharacterController\CharacterLib\obj\Debug\netstandard2.0\CharacterLib.pdb
