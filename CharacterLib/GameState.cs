@@ -10,6 +10,11 @@ namespace CharacterLib
         Heal
     }
 
+    public class CharacterEventArgs : EventArgs
+    {
+        public string Message { get; set; }
+    }
+
     public class GameState
     {
         //public delegate void FireGameEffect(Character pc, GameEffect effect);

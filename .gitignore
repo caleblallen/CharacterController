@@ -2,4 +2,10 @@
 # This .gitignore file was automatically created by Microsoft(R) Visual Studio.
 ################################################################################
 
-/.vs/CharacterController/v16
+/.vs
+/CharacterLib/bin
+/CharacterLib/obj
+
+
+/TestCharacterController/bin
+/TestCharacterController/obj

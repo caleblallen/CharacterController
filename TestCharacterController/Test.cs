@@ -128,12 +128,41 @@ namespace Tests
             };
             var character = new Character()
             {
-                HitPoints = testHitPoints
+                HitPoints = testHitPoints,
+                MaxHitPoints = testHitPoints * 2
             };
 
             character.TakeDamage(testDamage);
 
             Assert.AreEqual(0, character.HitPoints);
+        }
+
+        [Test]
+        public void Character_TakeDamage_EmitsUnconciousForZeroHitPoints()
+        {
+            int testHitPoints = 10;
+            var testDamage = new Damage()
+            {
+                Amount = (int)(testHitPoints * 1.5)
+            };
+            var character = new Character()
+            {
+                HitPoints = testHitPoints,
+                MaxHitPoints = testHitPoints * 2
+            };
+
+            bool calledEvent = false;
+
+            character.Triggers += delegate (Object character_, CharacterEventArgs a) {
+                var c = (Character)character_;
+                Assert.AreEqual(a.Message, $"{c.Name} took {testDamage.Amount} damage and was knocked unconcious.");
+                Assert.AreEqual(0, character.HitPoints);
+                calledEvent = true;
+            };
+
+            character.TakeDamage(testDamage);
+            Assert.IsTrue(calledEvent);
+
         }
     }
 }
