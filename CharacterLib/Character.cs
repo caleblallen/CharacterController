@@ -11,8 +11,8 @@ namespace CharacterLib
         public CharacterClass CharacterClass { get; set; }
         public int HitPoints { get; set; }
         public int MaxHitPoints { get; set; }
-        //Can I put an event here and subscribe to it?
-        public event EventHandler<CharacterEventArgs> Triggers;
+
+        public event EventHandler<CharacterEventArgs> CharacterEvents;
 
         public void TakeDamage(Damage damage)
         {
@@ -21,26 +21,23 @@ namespace CharacterLib
             if (newHP > 0)
                 HitPoints = newHP;
             else
-            {
                 HandleCharacterGoesUnconcious(damage);
-
-            }
 
         }
         private void HandleCharacterGoesUnconcious(Damage damage)
         {
-            bool characterIsInstantlyKilled = Math.Abs(HitPoints - damage.Amount) >= MaxHitPoints;
+            bool isCharacterKilledInstantly = Math.Abs(HitPoints - damage.Amount) >= MaxHitPoints;
 
             HitPoints = 0;
 
-            EmitUnconciousOrDead(damage, characterIsInstantlyKilled);
+            EmitUnconciousOrDead(damage, isCharacterKilledInstantly);
         }
 
-        private void EmitUnconciousOrDead(Damage damage, bool characterIsInstantlyKilled)
+        private void EmitUnconciousOrDead(Damage damage, bool killed)
         {
-            string currentState = characterIsInstantlyKilled ? "instantly killed" : "knocked unconcious";
+            string currentState = killed ? "instantly killed" : "knocked unconcious";
 
-            Triggers?.Invoke(this, new CharacterEventArgs()
+            CharacterEvents?.Invoke(this, new CharacterEventArgs()
             {
                 Message = $"{Name} took {damage.Amount} damage and was {currentState}."
             });

@@ -30,12 +30,12 @@ namespace Tests
                 HitPoints = testHitPoints,
                 Stats = new VitalStatistics
                 {
-                    Strength = 12,
-                    Dexterity = 12,
-                    Constitution = 12,
-                    Intelligence = 12,
-                    Wisdom = 12,
-                    Charisma = 12
+                    Strength = new Stat { Score = 12 },
+                    Dexterity = new Stat { Score = 12 },
+                    Constitution = new Stat { Score = 12 },
+                    Intelligence = new Stat { Score = 12 },
+                    Wisdom = new Stat { Score = 12 },
+                    Charisma = new Stat { Score = 12 }
                 },
                 CharacterClass = new CharacterClass()
                 {
@@ -153,7 +153,7 @@ namespace Tests
 
             bool calledEvent = false;
 
-            character.Triggers += delegate (Object character_, CharacterEventArgs a) {
+            character.CharacterEvents += delegate (Object character_, CharacterEventArgs a) {
                 var c = (Character)character_;
                 Assert.AreEqual(a.Message, $"{c.Name} took {testDamage.Amount} damage and was knocked unconcious.");
                 Assert.AreEqual(0, character.HitPoints);

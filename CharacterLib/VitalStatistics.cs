@@ -6,33 +6,24 @@ namespace CharacterLib
 {
     public class VitalStatistics
     {
-        public int Strength { get; set; }
-        public int Dexterity { get; set; }
-        public int Constitution { get; set; }
-        public int Intelligence { get; set; }
-        public int Wisdom { get; set; }
-        public int Charisma { get; set; }
-        public int StrengthModifier { get { return VitalStatistics.ToMod(Strength); } }
-        public int DexterityModifier { get { return VitalStatistics.ToMod(Dexterity); } }
-        public int ConstitutionModifier { get { return VitalStatistics.ToMod(Constitution); } }
-        public int IntelligenceModifier { get { return VitalStatistics.ToMod(Intelligence); } }
-        public int WisdomModifier { get { return VitalStatistics.ToMod(Wisdom); } }
-        public int CharismaModifier { get { return VitalStatistics.ToMod(Charisma); } }
-
+        public Stat Strength { get; set; }
+        public Stat Dexterity { get; set; }
+        public Stat Constitution { get; set; }
+        public Stat Intelligence { get; set; }
+        public Stat Wisdom { get; set; }
+        public Stat Charisma { get; set; }
 
         public VitalStatistics(int strength, int dexterity, int constitution, int intelligence, int wisdom, int charisma)
         {
-            Strength = strength;
-            Dexterity = dexterity;
-            Constitution = constitution;
-            Intelligence = intelligence;
-            Wisdom = wisdom;
-            Charisma = charisma;
+            Strength = new Stat { Score = strength };
+            Dexterity = new Stat { Score = dexterity };
+            Constitution = new Stat { Score = constitution };
+            Intelligence = new Stat { Score = intelligence };
+            Wisdom = new Stat { Score = wisdom };
+            Charisma = new Stat { Score = charisma };
         }
 
-        public VitalStatistics()
-        {
-        }
+        public VitalStatistics() { }
 
         public static VitalStatistics operator +(VitalStatistics a, VitalStatistics b)
         {
@@ -47,27 +38,22 @@ namespace CharacterLib
             };
         }
 
-        private static int ToMod(int stat)
-        {
-            return (int)Math.Floor(((double)stat - 10.0) / 2.0);
-        }
-
         public override bool Equals(object obj)
         {
             if ((obj == null) || !this.GetType().Equals(obj.GetType()))
-            {
                 return false;
-            }
             else
-            {
-                VitalStatistics other = (VitalStatistics)obj;
-                return Strength == other.Strength &&
-                    Dexterity == other.Dexterity &&
-                    Constitution == other.Constitution &&
-                    Intelligence == other.Intelligence &&
-                    Wisdom == other.Wisdom &&
-                    Charisma == other.Charisma;
-            }
+                return this.Equals(obj as VitalStatistics);
+        }
+
+        public bool Equals(VitalStatistics other)
+        {
+            return Strength.Equals(other.Strength) &&
+                Dexterity.Equals(other.Dexterity) &&
+                Constitution.Equals(other.Constitution) &&
+                Intelligence.Equals(other.Intelligence) &&
+                Wisdom.Equals(other.Wisdom) &&
+                Charisma.Equals(other.Charisma);
         }
 
         public override int GetHashCode()
@@ -78,12 +64,12 @@ namespace CharacterLib
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.AppendFormat("Strength: {0} [{1}{2}]{3}", Strength, (StrengthModifier < 0) ? "" : "+", StrengthModifier, Environment.NewLine);
-            sb.AppendFormat("Dexterity: {0} [{1}{2}]{3}", Dexterity, (DexterityModifier < 0) ? "" : "+", DexterityModifier, Environment.NewLine);
-            sb.AppendFormat("Constitution: {0} [{1}{2}]{3}", Constitution, (ConstitutionModifier < 0) ? "" : "+", ConstitutionModifier, Environment.NewLine);
-            sb.AppendFormat("Intelligence: {0} [{1}{2}]{3}", Intelligence, (IntelligenceModifier < 0) ? "" : "+", IntelligenceModifier, Environment.NewLine);
-            sb.AppendFormat("Wisdom: {0} [{1}{2}]{3}", Wisdom, (WisdomModifier < 0) ? "" : "+", WisdomModifier, Environment.NewLine);
-            sb.AppendFormat("Charisma: {0} [{1}{2}]{3}", Charisma, (CharismaModifier < 0) ? "" : "+", CharismaModifier, Environment.NewLine);
+            sb.AppendFormat("Strength: {0} [{1}{2}]{3}", Strength.Score, (Strength.Mod < 0) ? "" : "+", Strength.Mod, Environment.NewLine);
+            sb.AppendFormat("Dexterity: {0} [{1}{2}]{3}", Dexterity.Score, (Dexterity.Mod < 0) ? "" : "+", Dexterity.Mod, Environment.NewLine);
+            sb.AppendFormat("Constitution: {0} [{1}{2}]{3}", Constitution.Score, (Constitution.Mod < 0) ? "" : "+", Constitution.Mod, Environment.NewLine);
+            sb.AppendFormat("Intelligence: {0} [{1}{2}]{3}", Intelligence.Score, (Intelligence.Mod < 0) ? "" : "+", Intelligence.Mod, Environment.NewLine);
+            sb.AppendFormat("Wisdom: {0} [{1}{2}]{3}", Wisdom.Score, (Wisdom.Mod < 0) ? "" : "+", Wisdom.Mod, Environment.NewLine);
+            sb.AppendFormat("Charisma: {0} [{1}{2}]{3}", Charisma.Score, (Charisma.Mod < 0) ? "" : "+", Charisma.Mod, Environment.NewLine);
             return sb.ToString();
         }
     }
