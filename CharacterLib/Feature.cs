@@ -10,8 +10,5 @@ namespace CharacterLib
         public int Level { get; set; }
         public string Rules { get; set; }
         public List<Option> Options { get; set; }
-        // Options
-        // Actions
-        // Triggers
     }
 }

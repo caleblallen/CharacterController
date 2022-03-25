@@ -22,7 +22,6 @@ namespace CharacterLib
                 HitPoints = newHP;
             else
                 HandleCharacterGoesUnconcious(damage);
-
         }
         private void HandleCharacterGoesUnconcious(Damage damage)
         {

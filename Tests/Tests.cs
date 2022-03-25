@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using NUnit.Framework;
+using Xunit;
 using CharacterLib;
-
 
 namespace Tests
 {
@@ -12,15 +11,10 @@ namespace Tests
     {
 
     }
-    class TestCharacterClass
+    public class TestCharacterClass
     {
-        [SetUp]
-        public void Setup()
-        {
 
-        }
-
-        [Test]
+        [Fact]
         public void CharacterClass_ConstructorAndProperties_ConstructorAndPropertiesWork()
         {
             int testHitPoints = 100;
@@ -63,18 +57,19 @@ namespace Tests
                 }
             };
 
-            Assert.Pass();
+            Assert.True(true);
         }
 
     }
 
-    class TestCharacter
+    public class TestCharacter
     {
-        [Test]
+        [Fact]
         public void Character_TakeDamage_ReducesHitPoints()
         {
             int testHitPoints = 100;
-            var testDamage = new Damage(){
+            var testDamage = new Damage()
+            {
                 Amount = 10
             };
             var character = new Character()
@@ -84,10 +79,10 @@ namespace Tests
 
             character.TakeDamage(testDamage);
 
-            Assert.AreEqual(testHitPoints - testDamage.Amount, character.HitPoints);
+            Assert.Equal(testHitPoints - testDamage.Amount, character.HitPoints);
         }
 
-        [Test]
+        [Fact]
         public void Character_Heal_IncreasesHitPoints()
         {
             int testHitPoints = 50;
@@ -98,11 +93,11 @@ namespace Tests
                 MaxHitPoints = testHitPoints + testHealing
             };
             character.Heal(testHealing);
-            Assert.AreEqual(testHitPoints + testHealing, character.HitPoints);
+            Assert.Equal(testHitPoints + testHealing, character.HitPoints);
 
         }
 
-        [Test]
+        [Fact]
         public void Character_Heal_IncreasesHitPointsToMax()
         {
             int testHitPoints = 50;
@@ -114,11 +109,11 @@ namespace Tests
                 MaxHitPoints = maxHitPoints
             };
             character.Heal(testHealing);
-            Assert.AreEqual(maxHitPoints, character.HitPoints);
+            Assert.Equal(maxHitPoints, character.HitPoints);
 
         }
 
-        [Test]
+        [Fact]
         public void Character_TakeDamage_DoesNotGoBelowZero()
         {
             int testHitPoints = 10;
@@ -134,10 +129,10 @@ namespace Tests
 
             character.TakeDamage(testDamage);
 
-            Assert.AreEqual(0, character.HitPoints);
+            Assert.Equal(0, character.HitPoints);
         }
 
-        [Test]
+        [Fact]
         public void Character_TakeDamage_EmitsUnconciousForZeroHitPoints()
         {
             int testHitPoints = 10;
@@ -155,13 +150,13 @@ namespace Tests
 
             character.CharacterEvents += delegate (Object character_, CharacterEventArgs a) {
                 var c = (Character)character_;
-                Assert.AreEqual(a.Message, $"{c.Name} took {testDamage.Amount} damage and was knocked unconcious.");
-                Assert.AreEqual(0, character.HitPoints);
+                Assert.Equal(a.Message, $"{c.Name} took {testDamage.Amount} damage and was knocked unconcious.");
+                Assert.Equal(0, character.HitPoints);
                 calledEvent = true;
             };
 
             character.TakeDamage(testDamage);
-            Assert.IsTrue(calledEvent);
+            Assert.True(calledEvent);
 
         }
     }

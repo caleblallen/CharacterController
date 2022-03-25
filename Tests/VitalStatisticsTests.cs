@@ -1,18 +1,14 @@
-using NUnit.Framework;
-using CharacterLib;
 using System;
+using Xunit;
+using CharacterLib;
 using System.Text;
 
 namespace Tests
 {
-    public class Tests
+    public class VitalStatisticsTests
     {
-        [SetUp]
-        public void Setup()
-        {
-        }
 
-        [Test]
+        [Fact]
         public void VitalStatistics_ToMod_ComputesPositiveMods()
         {
             var stats = new VitalStatistics()
@@ -36,22 +32,22 @@ namespace Tests
             };
 
 
-            Assert.That(stats.Strength.Mod, Is.EqualTo(5));
-            Assert.That(stats.Dexterity.Mod, Is.EqualTo(4));
-            Assert.That(stats.Constitution.Mod, Is.EqualTo(4));
-            Assert.That(stats.Intelligence.Mod, Is.EqualTo(3));
-            Assert.That(stats.Wisdom.Mod, Is.EqualTo(3));
-            Assert.That(stats.Charisma.Mod, Is.EqualTo(2));
+            Assert.Equal(5, stats.Strength.Mod);
+            Assert.Equal(4, stats.Dexterity.Mod);
+            Assert.Equal(4, stats.Constitution.Mod);
+            Assert.Equal(3, stats.Intelligence.Mod);
+            Assert.Equal(3, stats.Wisdom.Mod);
+            Assert.Equal(2, stats.Charisma.Mod);
 
-            Assert.That(stats2.Strength.Mod, Is.EqualTo(2));
-            Assert.That(stats2.Dexterity.Mod, Is.EqualTo(1));
-            Assert.That(stats2.Constitution.Mod, Is.EqualTo(1));
-            Assert.That(stats2.Intelligence.Mod, Is.EqualTo(0));
-            Assert.That(stats2.Wisdom.Mod, Is.EqualTo(0));
+            Assert.Equal(2, stats2.Strength.Mod);
+            Assert.Equal(1, stats2.Dexterity.Mod);
+            Assert.Equal(1, stats2.Constitution.Mod);
+            Assert.Equal(0, stats2.Intelligence.Mod);
+            Assert.Equal(0, stats2.Wisdom.Mod);
 
         }
 
-        [Test]
+        [Fact]
         public void VitalStatistics_ToMod_ComputesNegativeMods()
         {
             var stats = new VitalStatistics()
@@ -75,20 +71,20 @@ namespace Tests
             };
 
 
-            Assert.That(stats.Strength.Mod, Is.EqualTo(-1));
-            Assert.That(stats.Dexterity.Mod, Is.EqualTo(-1));
-            Assert.That(stats.Constitution.Mod, Is.EqualTo(-2));
-            Assert.That(stats.Intelligence.Mod, Is.EqualTo(-2));
-            Assert.That(stats.Wisdom.Mod, Is.EqualTo(-3));
-            Assert.That(stats.Charisma.Mod, Is.EqualTo(-3));
+            Assert.Equal(-1, stats.Strength.Mod);
+            Assert.Equal(-1, stats.Dexterity.Mod);
+            Assert.Equal(-2, stats.Constitution.Mod);
+            Assert.Equal(-2, stats.Intelligence.Mod);
+            Assert.Equal(-3, stats.Wisdom.Mod);
+            Assert.Equal(-3, stats.Charisma.Mod);
 
-            Assert.That(stats2.Strength.Mod, Is.EqualTo(-4));
-            Assert.That(stats2.Dexterity.Mod, Is.EqualTo(-4));
-            Assert.That(stats2.Constitution.Mod, Is.EqualTo(-5));
+            Assert.Equal(-4, stats2.Strength.Mod);
+            Assert.Equal(-4, stats2.Dexterity.Mod);
+            Assert.Equal(-5, stats2.Constitution.Mod);
 
         }
 
-        [Test]
+        [Fact]
         public void VitalStatistics_Properties_AddsChildVitalStatistics()
         {
             var stats = new VitalStatistics()
@@ -113,15 +109,15 @@ namespace Tests
 
             VitalStatistics total = stats + stats2;
 
-            Assert.That(total.Strength.Score, Is.EqualTo(9));
-            Assert.That(total.Dexterity.Score, Is.EqualTo(11));
-            Assert.That(total.Constitution.Score, Is.EqualTo(8));
-            Assert.That(total.Intelligence.Score, Is.EqualTo(12));
-            Assert.That(total.Wisdom.Score, Is.EqualTo(10));
+            Assert.Equal(9, total.Strength.Score);
+            Assert.Equal(11, total.Dexterity.Score);
+            Assert.Equal(8, total.Constitution.Score);
+            Assert.Equal(12, total.Intelligence.Score);
+            Assert.Equal(10, total.Wisdom.Score);
 
         }
 
-        [Test]
+        [Fact]
         public void VitalStatistics_Equals_SameStatsAreEqual()
         {
             var stats = new VitalStatistics()
@@ -146,11 +142,11 @@ namespace Tests
 
             var total = stats + stats2;
 
-            Assert.AreEqual(stats, stats2);
-            Assert.AreNotEqual(total, stats2);
+            Assert.Equal(stats, stats2);
+            Assert.NotEqual(total, stats2);
         }
 
-        [Test]
+        [Fact]
         public void VitalStatistics_ToString_ExpectedStringRepresentation()
         {
             var stats = new VitalStatistics()
@@ -171,18 +167,9 @@ namespace Tests
             sb.AppendFormat("Wisdom: 20 [+5]{0}", Environment.NewLine);
             sb.AppendFormat("Charisma: 10 [+0]{0}", Environment.NewLine);
 
-            //string repr = "Strength: 8 [-1]" + Environment.NewLine;
-            //repr += "Dexterity: 12 [+1]" + Environment.NewLine;
-            //repr += "Constitution: 10 [+0]" + Environment.NewLine;
-            //repr += "Intelligence: 1 [-5]" + Environment.NewLine;
-            //repr += "Wisdom: 20 [+5]" + Environment.NewLine;
-            //repr += "Charisma: 10 [+0]" + Environment.NewLine;
-       
-            Assert.AreEqual(sb.ToString(), stats.ToString());
+            Assert.Equal(sb.ToString(), stats.ToString());
 
-           
+
         }
-
-
     }
 }
