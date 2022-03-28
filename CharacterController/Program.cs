@@ -5,15 +5,30 @@ using CharacterLib;
 
 namespace CharacterController
 {
+    class Constants
+    {
+        public static int MAX_ROWS { get; } = 30;
+        public static int MAX_COLS { get; } = 120;
+    }
+
     class Program
     {
         static void Main(string[] args)
         {
             bool done = false;
+            Composite gameScreen = new Composite()
+            {
+                Height = Constants.MAX_ROWS,
+                Width = Constants.MAX_COLS,
+                Style = new ScreenStyle()
+            };
 
             while (!done)
             {
+                Console.SetWindowSize(Constants.MAX_COLS, Constants.MAX_ROWS);
+
                 Console.Clear();
+                Console.Write(gameScreen.Render());
                 Console.Write("Enter comm >");
                 string cmd = Console.ReadLine();
 
